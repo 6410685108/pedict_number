@@ -32,13 +32,13 @@ public class DisplayGUI {
         confirmInput.setBounds(210, 130, 80, 25);
         panel.add(confirmInput);
 
-        JLabel allGuess = new JLabel("");
-        allGuess.setBounds(200, 190, 300, 25);
-        panel.add(allGuess);
-
         JLabel resultLabel = new JLabel("");
-        resultLabel.setBounds(100, 160, 300, 25);
+        resultLabel.setBounds(200, 160, 300, 25);
         panel.add(resultLabel);
+
+        JLabel allGuess = new JLabel("");
+        allGuess.setBounds(100, 190, 300, 25);
+        panel.add(allGuess);
 
         confirmInput.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
