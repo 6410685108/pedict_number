@@ -20,6 +20,10 @@ public class DisplayGUI {
     void showDisplay(JPanel panel) {
         panel.setLayout(null);
 
+        JLabel scoreLabel = new JLabel("Score: ");
+        scoreLabel.setBounds(50, 20, 150, 25);
+        panel.add(scoreLabel);
+
         JLabel Label = new JLabel("Enter guess number:");
         Label.setBounds(175, 60, 150, 25);
         panel.add(Label);
@@ -33,11 +37,11 @@ public class DisplayGUI {
         panel.add(confirmInput);
 
         JLabel resultLabel = new JLabel("");
-        resultLabel.setBounds(180, 160, 300, 25);
+        resultLabel.setBounds(50, 160, 400, 25);
         panel.add(resultLabel);
 
         JLabel allGuess = new JLabel("");
-        allGuess.setBounds(100, 190, 300, 25);
+        allGuess.setBounds(50, 190, 400, 25);
         panel.add(allGuess);
 
         confirmInput.addActionListener(new ActionListener() {
@@ -45,10 +49,18 @@ public class DisplayGUI {
                 String guess = guessInput.getText();
                 try {
                     send.println(guess);
-                    String response = recv.readLine();
+                    String response = recv.readLine() ;
                     resultLabel.setText(response);
                     allGuesses.add(guess);
-                    allGuess.setText("All guesses: " + allGuesses);
+                    if (response.equals("You guess correct, Now number is changed.")) {
+                        response = recv.readLine() ;
+                        scoreLabel.setText("Score: " + response);
+                        allGuesses.clear();
+                        allGuess.setText("");
+                    }
+                    if (allGuesses.size() > 0) {
+                        allGuess.setText("All guesses: " + allGuesses);
+                    }
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
