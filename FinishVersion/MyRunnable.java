@@ -30,15 +30,37 @@ public class MyRunnable implements Runnable {
                         System.out.println("Client guess: " + guessNum);
                         send.println(allScore);
                         if (guessNum < randomNum) {
-                            if (low < guessNum && guessNum >= 1) {
+                            if (low <= guessNum && guessNum >= 1) {
                                 low = guessNum+1;
                             }
-                            send.println("You should guess higher. " + "You should guess between : " + low + " - " + high);
+                            if (low != high){
+                                send.println("You should guess higher. " + "You should guess between : " + low + " - " + high);
+                            } else {
+                                send.println("You lost");
+                                for (int i = 0; i < allTID.size(); i++) {
+                                    if (allTID.get(i) != TID) {
+                                        allScore.set(i, allScore.get(i) + 1);
+                                    }
+                                }
+                                send.println(allScore);
+                                break;
+                            }
                         } else if (guessNum > randomNum) {
-                            if (high > guessNum && guessNum <= 100) {
+                            if (high >= guessNum && guessNum <= 100) {
                                 high = guessNum-1;
                             }
-                            send.println("You should guess lower. " + "You should guess between : " + low + " - " + high);
+                            if (low != high){
+                                send.println("You should guess higher. " + "You should guess between : " + low + " - " + high);
+                            } else {
+                                send.println("You lost");
+                                for (int i = 0; i < allTID.size(); i++) {
+                                    if (allTID.get(i) != TID) {
+                                        allScore.set(i, allScore.get(i) + 1);
+                                    }
+                                }
+                                send.println(allScore);
+                                break;
+                            }
                         } else {
                             send.println("You guess correct, Now number is changed.");
                             for (int i = 0; i < allTID.size(); i++) {

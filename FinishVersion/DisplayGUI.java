@@ -69,7 +69,7 @@ public class DisplayGUI {
                     }
                     resultLabel.setText(response);
                     allGuesses.add(guess);
-                    if (response.equals("You guess correct, Now number is changed.")) {
+                    if (response.equals("You guess correct, Now number is changed." )|| response.equals("You lost")) {
                         response = recv.readLine() ;
                         response = response.substring(1, response.length() - 1);
                         String[] responseArray = response.split(", ");
