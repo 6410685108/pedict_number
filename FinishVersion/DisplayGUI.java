@@ -33,7 +33,7 @@ public class DisplayGUI {
         panel.add(confirmInput);
 
         JLabel resultLabel = new JLabel("");
-        resultLabel.setBounds(200, 160, 300, 25);
+        resultLabel.setBounds(180, 160, 300, 25);
         panel.add(resultLabel);
 
         JLabel allGuess = new JLabel("");
