@@ -20,9 +20,17 @@ public class DisplayGUI {
     void showDisplay(JPanel panel) {
         panel.setLayout(null);
 
-        JLabel scoreLabel = new JLabel("Score: ");
-        scoreLabel.setBounds(50, 20, 150, 25);
+        JLabel scoreLabel = new JLabel("Score");
+        scoreLabel.setBounds(50, 15, 150, 25);
         panel.add(scoreLabel);
+
+        JLabel scoreLabel1 = new JLabel("");
+        scoreLabel1.setBounds(50, 35, 150, 25);
+        panel.add(scoreLabel1);
+
+        JLabel scoreLabel2 = new JLabel("");
+        scoreLabel2.setBounds(50, 50, 150, 25);
+        panel.add(scoreLabel2);
 
         JLabel Label = new JLabel("Enter guess number:");
         Label.setBounds(175, 60, 150, 25);
@@ -50,11 +58,25 @@ public class DisplayGUI {
                 try {
                     send.println(guess);
                     String response = recv.readLine() ;
+                    if (response.charAt(0) == '[') {
+                        response = response.substring(1, response.length() - 1);
+                        String[] responseArray = response.split(", ");
+                        response = recv.readLine() ;
+                        scoreLabel1.setText("Player 1: " + responseArray[0]);
+                        if (responseArray.length > 1) {
+                            scoreLabel2.setText("Player 2: " + responseArray[1]);
+                        }
+                    }
                     resultLabel.setText(response);
                     allGuesses.add(guess);
                     if (response.equals("You guess correct, Now number is changed.")) {
                         response = recv.readLine() ;
-                        scoreLabel.setText("Score: " + response);
+                        response = response.substring(1, response.length() - 1);
+                        String[] responseArray = response.split(", ");
+                        scoreLabel1.setText("Player 1: " + responseArray[0]);
+                        if (responseArray.length > 1) {
+                            scoreLabel2.setText("Player 2: " + responseArray[1]);
+                        }
                         allGuesses.clear();
                         allGuess.setText("");
                     }

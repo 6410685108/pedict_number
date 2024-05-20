@@ -28,6 +28,7 @@ public class MyRunnable implements Runnable {
                     while ((input = recv.readLine()) != null) {
                         int guessNum = Integer.parseInt(input);
                         System.out.println("Client guess: " + guessNum);
+                        send.println(allScore);
                         if (guessNum < randomNum) {
                             if (low < guessNum && guessNum >= 1) {
                                 low = guessNum+1;
