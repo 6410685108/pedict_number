@@ -1,7 +1,6 @@
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MyRunnable implements Runnable {
     private Socket socket;
@@ -36,10 +35,10 @@ public class MyRunnable implements Runnable {
                             if (low != high){
                                 send.println("You should guess higher. " + "You should guess between : " + low + " - " + high);
                             } else {
-                                send.println("You lost");
+                                send.println("You lost, Now number is changed.");
                                 for (int i = 0; i < allTID.size(); i++) {
                                     if (allTID.get(i) != TID) {
-                                        allScore.set(i, allScore.get(i) + 1);
+                                        allScore.set(i, allScore.get(i) + (1));
                                     }
                                 }
                                 send.println(allScore);
@@ -52,7 +51,7 @@ public class MyRunnable implements Runnable {
                             if (low != high){
                                 send.println("You should guess higher. " + "You should guess between : " + low + " - " + high);
                             } else {
-                                send.println("You lost");
+                                send.println("You lost, Now number is changed.");
                                 for (int i = 0; i < allTID.size(); i++) {
                                     if (allTID.get(i) != TID) {
                                         allScore.set(i, allScore.get(i) + 1);
@@ -65,7 +64,7 @@ public class MyRunnable implements Runnable {
                             send.println("You guess correct, Now number is changed.");
                             for (int i = 0; i < allTID.size(); i++) {
                                 if (allTID.get(i) == TID) {
-                                    allScore.set(i, allScore.get(i) + 1);
+                                    allScore.set(i, allScore.get(i) + (allTID.size()-1));
                                 }
                             }
                             send.println(allScore);
